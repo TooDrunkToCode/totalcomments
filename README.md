@@ -1,0 +1,4 @@
+totalcomments
+=============
+
+Скрипт LeproTotalComments
