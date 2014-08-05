@@ -2,7 +2,7 @@
 // @name           ScrollLikeAKing
 // @namespace      TooDrunkToCode
 // @description    Скроллим комментарии без мыши и тачпада
-// @include        http://*leprosorium.ru/comments/*
+// @include        https://*leprosorium.ru/comments/*
 // ==/UserScript==
 
 function addJQuery(callback) {
