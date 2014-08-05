@@ -17,7 +17,7 @@ function addJQuery(callback) {
 }
 
 function initTotalComments() {
-    var nice_quality = 0.8;
+    var nice_quality = 0.85;
     var $ = window.jQ;
     var original_poster_username = $('.post .ddi a.c_user').html();
     var username = $('.b-header_tagline a').html();
@@ -41,7 +41,9 @@ function initTotalComments() {
         'v': 86,
         'c': 67,
         'a': 65,
-        'i': 73
+        'i': 73,
+        'l': 76,
+        'space':32
     };
     var comment_pointer = 0;
 
@@ -94,6 +96,22 @@ function initTotalComments() {
         }
         else if ( event.which == keys.k ) {
             scrollToPrev();
+        }
+        else if ( event.which == keys.l ) {
+            var button_expand = $('a.c_expand', last_active_comment)
+            var button_collapse = $('a.c_collapse', last_active_comment)
+            var button = ($(button_expand).hasClass('hidden')) ? button_collapse : button_expand;
+            if (button) $(button).click();
+        }
+        else if ( event.which == keys.space ) {
+            var comment_body = $('.c_body', last_active_comment);
+            var first_link = $('a', comment_body);
+            first_link = first_link[0] || first_link;
+            if ($(first_link).html()) {
+              event.preventDefault();
+              $(first_link).css('border', '2px solid green');
+              $(first_link).focus();
+            };
         }
         else if ( event.which == keys.n ) {
             comments_to_iterate = comments_new;
