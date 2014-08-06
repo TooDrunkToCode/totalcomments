@@ -16,6 +16,18 @@ function addJQuery(callback) {
   document.body.appendChild(script);
 }
 
+function addGlobalStyle(css) {
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if (!head) { return; }
+    style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
+}
+
+addGlobalStyle("#slak-message {z-index: 500; border: 5px solid black; width: 200px; position: fixed; left: 20px; bottom: 20px; font-size: 100px; color: black; text-align: center;  opacity:0.1; display: none;}");
+
 function initTotalComments() {
     var nice_quality = 0.85;
     var $ = window.jQ;
@@ -46,6 +58,8 @@ function initTotalComments() {
         'space':32
     };
     var comment_pointer = 0;
+
+    $('body').append('<div id="slak-message">K</div>');
 
     for (i=0; i<comment_nodes.length; i++) {
         var node = comment_nodes[i];
@@ -114,14 +128,17 @@ function initTotalComments() {
             };
         }
         else if ( event.which == keys.n ) {
+            fireMessage('N');
             comments_to_iterate = comments_new;
             comment_pointer = -1;
         }
         else if ( event.which == keys.c ) {
+            fireMessage('C');
             comments_to_iterate = comments_nice;
             comment_pointer = -1;
         }
         else if ( event.which == keys.a ) {
+            fireMessage('A');
             comments_to_iterate = comments;
         }
         else if ( event.which == keys.i ) {
@@ -169,6 +186,12 @@ function initTotalComments() {
         }, 150);
     }
 
+    function fireMessage(message_text) {
+        $('#slak-message').html(message_text);
+        $('#slak-message').show(0, function(){
+            $(this).fadeOut(800);
+        });
+    }
 }
 
 if(window.jQ) initTotalComments();
